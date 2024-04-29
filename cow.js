@@ -2592,6 +2592,24 @@ var animateCow = function (time) {
   GL.uniformMatrix4fv(_MMatrix, false, MODEL_MATRIX);
   
   GL.drawElements(GL.TRIANGLES, Cowkepala2.faces.length, GL.UNSIGNED_SHORT, 0);
+  
+   //ALIS
+
+  var aliskiriCow = [
+    [6.5, 10, 2.5],
+    [8.5, 10, 2.5],
+    [8.5, 9.5, 2.5]
+  ]
+
+  var aliskananCow = [
+    [10.5, 10, 2.5],
+    [8.2, 10, 2.5],
+    [8.2, 9.5, 2.5]
+  ]
+
+  drawBezierCurve(GL,SHADER_PROGRAM,aliskiriCow,100);
+  drawBezierCurve(GL,SHADER_PROGRAM,aliskananCow,100);
+
 
     GL.flush();
   
@@ -2647,6 +2665,24 @@ var animateCow = function (time) {
   
   // HIDUNG
   drawObject(HIDUNG_VERTEX, HIDUNG_COLORS, HIDUNG_FACES, hidung.faces.length);
+  
+  // ALIS
+    //
+    var alisKiri =[
+      [-3.3, 6.7, 3],
+      [-1.5, 6.5, 3],
+      [-1.6, 6, 3],
+    ];
+    
+    var alisKanan =[
+      [-1.4, 6, 3],
+      [-1, 6.5, 3],
+      [0.3, 6.7,3],
+    ];
+
+    drawBezierCurve(GL,SHADER_PROGRAM,alisKiri,100);
+    drawBezierCurve(GL,SHADER_PROGRAM,alisKanan,100);
+    
     
 
     GL.flush();
