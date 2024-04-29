@@ -1,3 +1,4 @@
+
 function generateTorus(x, y, z, c1, c2, c3, radius1, radius2, segments1, segments2, rotationX, rotationY, rotationZ) {
     var vertices = [];
     var colors = [];
@@ -259,6 +260,7 @@ function generateTorus(x, y, z, c1, c2, c3, radius1, radius2, segments1, segment
     
         return { vertices: vertices, colors: colors, faces: faces };
     }
+     
 
     function generateTube1(x, y, z, c1, c2, c3, height, bottomRadius, topRadius, segments, rotationX, rotationY, rotationZ) {
         var angle_increment = (2 * Math.PI) / segments;
@@ -408,6 +410,51 @@ function generateTorus(x, y, z, c1, c2, c3, radius1, radius2, segments1, segment
       
         return { vertices: vertices, colors: colors, faces: faces };
     }
+
+    function generateTube3(x, y, z, c1, c2, c3, height, bottomRadius, topRadius, segments) {
+        var angle_increment = (2 * Math.PI) / segments;
+        var vertices = [];
+        var colors = [];
+        var faces = [];
+      
+        for (var i = 0; i < segments; i++) {
+            var angle1 = i * angle_increment;
+            var angle2 = (i + 1) * angle_increment;
+      
+            // Bottom vertices
+            vertices.push(x + bottomRadius * Math.cos(angle1), y, z + bottomRadius * Math.sin(angle1));
+            vertices.push(x + bottomRadius * Math.cos(angle2), y, z + bottomRadius * Math.sin(angle2));
+      
+            // Top vertices
+            vertices.push(x + topRadius * Math.cos(angle1), y + height, z + topRadius * Math.sin(angle1));
+            vertices.push(x + topRadius * Math.cos(angle2), y + height, z + topRadius * Math.sin(angle2));
+      
+            // Colors for all vertices
+            colors.push(c1,c2,c3);
+            colors.push(c1,c2,c3);
+            colors.push(c1,c2,c3);
+            colors.push(c1,c2,c3);
+      
+            // Faces for this segment
+            var baseIndex = i * 4;
+            faces.push(baseIndex, baseIndex + 1, baseIndex + 2); // Triangle 1
+            faces.push(baseIndex + 1, baseIndex + 3, baseIndex + 2); // Triangle 2
+        }
+      
+        // Closing faces for top and bottom circles
+        for (var i = 0; i < segments - 1; i++) {
+            // Bottom circle
+            faces.push(i * 4, (i + 1) * 4, vertices.length / 3 - 2);
+            // Top circle
+            faces.push(i * 4 + 2, (i + 1) * 4 + 2, vertices.length / 3 - 1);
+        }
+      
+        // Close the last segment with the first one
+        faces.push((segments - 1) * 4, 0, vertices.length / 3 - 2);
+        faces.push((segments - 1) * 4 + 2, 2, vertices.length / 3 - 1);
+      
+        return { vertices: vertices, colors: colors, faces: faces };
+      }
     
     // Function to rotate a point around a specified axis
     function rotatePoint(x, y, z, rx, ry, rz, cx, cy, cz) {
@@ -800,6 +847,5 @@ function generateTorus(x, y, z, c1, c2, c3, radius1, radius2, segments1, segment
 
         return { vertices: (rotateY(vertices,Math.PI)), colors: colors, faces: faces };
     }
-    
     
     
