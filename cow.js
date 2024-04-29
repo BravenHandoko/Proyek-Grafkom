@@ -1004,7 +1004,7 @@ var pita = generateHyperboloid(-1.65, 5.3, -1.8, .8, .5, .8, collarColor[0], col
   //////////////////////////////////////////////////////////////////////////////////////// HUMAN //////////////////////////////////////////////////////////////////////////////////////
   
   //matrix
-  var PROJECTION_MATRIX = LIBS.get_projection(40, CANVAS.width / CANVAS.height, 1, 100);
+  var PROJECTION_MATRIX = LIBS.get_projection(70, CANVAS.width / CANVAS.height, 1, 100);
   var VIEW_MATRIX = LIBS.get_I4();
   var MODEL_MATRIX = LIBS.get_I4();
 
